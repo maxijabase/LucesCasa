@@ -1,10 +1,12 @@
 ﻿using LucesCasa.Backend;
-using LucesCasa.Models;
+using LucesCasa.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LucesCasa.Api.Controllers
 {
-    public class AuthController : ControllerBase
+    [Route("login")]
+    [ApiController]
+    public class AuthController : Controller
     {
         private readonly BEAuth _authHelper;
 
@@ -13,7 +15,7 @@ namespace LucesCasa.Api.Controllers
             _authHelper = authHelper;
         }
 
-        [HttpPost, Route("login")]
+        [HttpPost]
         public IActionResult Login(LoginDTO model)
         {
             if (model == null)

@@ -1,11 +1,14 @@
 ﻿using LucesCasa.Backend;
-using LucesCasa.Models;
+using LucesCasa.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LucesCasa.Api.Controllers
 {
+    [Authorize]
+    [Route("[controller]")]
+    [ApiController]
     public class LucesController : Controller
     {
         private readonly BELuces _lucesHelper;
@@ -14,11 +17,11 @@ namespace LucesCasa.Api.Controllers
             _lucesHelper = lucesHelper;
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> EnviarInstruccion(InstruccionDTO ins)
         {
-            _lucesHelper.ToString();
+            await _lucesHelper.EnviarInstruccion(ins);
+            return Ok();
         }
     }
 }
